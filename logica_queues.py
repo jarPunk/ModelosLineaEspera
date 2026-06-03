@@ -143,9 +143,10 @@ def calc_mgk_bloqueo(lambd: float, mu: float, k: int, j_opcional: int | None = N
     p0 = 1 / sum((a**n) / math.factorial(n) for n in range(k + 1))
     lambda_efectiva = lambd * (1 - pb)
     l = a * (1 - pb)
-    utilizacion_media = l / k
+    # AJUSTE: Usamos la fórmula de la tabla: ρ = λ / (k*μ)
+    rho = lambd / (k * mu)
     w = 1 / mu
-    resultados = {"P0": p0, "Pk = Pb": pb, "Pw": a, "λe": lambda_efectiva, "ρ": utilizacion_media, "Lq": 0.0, "L": l, "Wq": 0.0, "W": w}
+    resultados = {"P0": p0, "Pk = Pb": pb, "Pw": a, "ρ": rho, "Lq": 0.0, "L": l, "Wq": 0.0, "W": w}
     if j_opcional is not None: resultados[f"P{j_opcional}"] = ((a**j_opcional) / math.factorial(j_opcional)) * p0
     return resultados
 
