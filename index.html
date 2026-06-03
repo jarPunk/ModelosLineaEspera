@@ -32,13 +32,68 @@
                 <option value="MMKINF">M/M/k/∞/N</option>
             </select>
 
-            <div id="MM1" class="tab-content active">
-                <h3>Modelo M/M/1</h3>
-                <div class="input-group"><label>λ (Tasa llegada):</label><input type="number" step="any" id="mm1_l" placeholder="Ej: 5"></div>
-                <div class="input-group"><label>μ (Tasa servicio):</label><input type="number" step="any" id="mm1_m" placeholder="Ej: 8"></div>
-                <div class="input-group"><label>n (opc):</label><input type="number" id="mm1_n" placeholder="Ej: 0"></div>
+                <div class="input-group"><label>λ (Tasa llegada):</label><input type="text" id="mm1_l" placeholder="Ej: 5 o 1/2"></div>
+                <div class="input-group"><label>μ (Tasa servicio):</label><input type="text" id="mm1_m" placeholder="Ej: 8 o 1/4"></div>
+                <div class="input-group"><label>n (opc):</label><input type="number" id="mm1_n" placeholder="Ej: 2"></div>
                 <button py-click="calc_mm1_ui">Calcular</button>
                 <div id="res_mm1" class="result-area"></div>
+            </div>
+
+            <div id="MD1" class="tab-content">
+                <h3>Modelo M/D/1</h3>
+                <div class="input-group"><label>λ (Tasa llegada):</label><input type="text" id="md1_l" placeholder="Ej: 4"></div>
+                <div class="input-group"><label>μ (Tasa servicio):</label><input type="text" id="md1_m" placeholder="Ej: 6"></div>
+                <button py-click="calc_md1_ui">Calcular</button>
+                <div id="res_md1" class="result-area"></div>
+            </div>
+
+            <div id="MMK" class="tab-content">
+                <h3>Modelo M/M/k</h3>
+                <div class="input-group"><label>λ (Tasa llegada):</label><input type="text" id="mmk_l" placeholder="Ej: 10"></div>
+                <div class="input-group"><label>μ (Tasa servicio):</label><input type="text" id="mmk_m" placeholder="Ej: 4"></div>
+                <div class="input-group"><label>k (Servidores):</label><input type="number" id="mmk_k" placeholder="Ej: 3"></div>
+                <div class="input-group"><label>n (opc):</label><input type="number" id="mmk_n" placeholder="Ej: 1"></div>
+                <button py-click="calc_mmk_ui">Calcular</button>
+                <div id="res_mmk" class="result-area"></div>
+            </div>
+
+            <div id="MG1" class="tab-content">
+                <h3>Modelo M/G/1</h3>
+                <div class="input-group"><label>λ (Tasa llegada):</label><input type="text" id="mg1_l" placeholder="Ej: 2"></div>
+                <div class="input-group"><label>μ (Tasa servicio):</label><input type="text" id="mg1_m" placeholder="Ej: 3"></div>
+                <div class="input-group"><label>σ (Desviación estándar):</label><input type="text" id="mg1_sigma" placeholder="Ej: 0.2 o 1/5"></div>
+                <button py-click="calc_mg1_ui">Calcular</button>
+                <div id="res_mg1" class="result-area"></div>
+            </div>
+
+            <div id="MGK" class="tab-content">
+                <h3>M/G/k (Bloqueo)</h3>
+                <div class="input-group"><label>λ (Tasa llegada):</label><input type="text" id="mgk_l" placeholder="Ej: 10"></div>
+                <div class="input-group"><label>μ (Tasa servicio):</label><input type="text" id="mgk_m" placeholder="Ej: 5"></div>
+                <div class="input-group"><label>k (Canales):</label><input type="number" id="mgk_k" placeholder="Ej: 3"></div>
+                <div class="input-group"><label>j (opc):</label><input type="number" id="mgk_j" placeholder="Ej: 1"></div>
+                <button py-click="calc_mgk_ui">Calcular</button>
+                <div id="res_mgk" class="result-area"></div>
+            </div>
+
+            <div id="MM1FF" class="tab-content">
+                <h3>M/M/1 Fuente Finita</h3>
+                <div class="input-group"><label>λ (Tasa por fuente):</label><input type="text" id="mm1ff_l" placeholder="Ej: 0.1"></div>
+                <div class="input-group"><label>μ (Tasa servicio):</label><input type="text" id="mm1ff_m" placeholder="Ej: 0.5"></div>
+                <div class="input-group"><label>N (Población):</label><input type="number" id="mm1ff_n" placeholder="Ej: 10"></div>
+                <div class="input-group"><label>n (opc):</label><input type="number" id="mm1ff_np" placeholder="Ej: 2"></div>
+                <button py-click="calc_mm1ff_ui">Calcular</button>
+                <div id="res_mm1ff" class="result-area"></div>
+            </div>
+
+            <div id="MMKINF" class="tab-content">
+                <h3>M/M/k/∞/N</h3>
+                <div class="input-group"><label>λ (Tasa por fuente):</label><input type="text" id="mmkinf_l" placeholder="Ej: 0.1"></div>
+                <div class="input-group"><label>μ (Tasa servicio):</label><input type="text" id="mmkinf_m" placeholder="Ej: 0.5"></div>
+                <div class="input-group"><label>k (Servidores):</label><input type="number" id="mmkinf_k" placeholder="Ej: 2"></div>
+                <div class="input-group"><label>N (Población):</label><input type="number" id="mmkinf_n" placeholder="Ej: 5"></div>
+                <button py-click="calc_mmkinf_ui">Calcular</button>
+                <div id="res_mmkinf" class="result-area"></div>
             </div>
 
             <div id="MD1" class="tab-content">
@@ -148,52 +203,67 @@
         # ... (las funciones calc_..._ui se mantienen igual)
         def calc_mm1_ui(event):
             try:
-                l = float(get_val("mm1_l"))
-                m = float(get_val("mm1_m"))
-                n = int(get_val("mm1_n")) if get_val("mm1_n") else None
+                l = lq._a_flotante(get_val("mm1_l"))
+                m = lq._a_flotante(get_val("mm1_m"))
+                n_str = get_val("mm1_n")
+                n = lq._asegurar_entero("n", lq._a_flotante(n_str), minimo=0) if n_str else None
                 show_res("mm1", lq.calc_mm1(l, m, n))
             except Exception as e: show_res("mm1", str(e))
 
         def calc_md1_ui(event):
             try:
-                l = float(get_val("md1_l"))
-                m = float(get_val("md1_m"))
+                l = lq._a_flotante(get_val("md1_l"))
+                m = lq._a_flotante(get_val("md1_m"))
                 show_res("md1", lq.calc_md1(l, m))
             except Exception as e: show_res("md1", str(e))
             
         def calc_mmk_ui(event):
             try:
-                res = lq.calc_mmk(float(get_val("mmk_l")), float(get_val("mmk_m")), int(get_val("mmk_k")), int(get_val("mmk_n")) if get_val("mmk_n") else None)
-                show_res("mmk", res)
+                l = lq._a_flotante(get_val("mmk_l"))
+                m = lq._a_flotante(get_val("mmk_m"))
+                k = lq._asegurar_entero("k", lq._a_flotante(get_val("mmk_k")), minimo=1)
+                n_str = get_val("mmk_n")
+                n = lq._asegurar_entero("n", lq._a_flotante(n_str), minimo=0) if n_str else None
+                show_res("mmk", lq.calc_mmk(l, m, k, n))
             except Exception as e: show_res("mmk", str(e))
             
         def calc_mg1_ui(event):
             try:
-                # Obtenemos σ, calculamos Cs^2 = (σ * μ)^2
-                sigma = float(get_val("mg1_sigma"))
-                mu = float(get_val("mg1_m"))
+                res = lq.calc_mg1(lq._a_flotante(get_val("mg1_l")), lq._a_flotante(get_val("mg1_m")), lq._a_flotante(get_val("mg1_sigma")))
+                # Nota: la logica interna de calc_mg1_ui que habiamos cambiado ya ajustaba el sigma, 
+                # pero ahora debemos usar _a_flotante para el sigma también.
+                # Re-aplicando la conversion:
+                sigma = lq._a_flotante(get_val("mg1_sigma"))
+                mu = lq._a_flotante(get_val("mg1_m"))
                 es = 1 / mu
                 cs2 = (sigma / es) ** 2
-                
-                res = lq.calc_mg1(float(get_val("mg1_l")), mu, cs2)
+                res = lq.calc_mg1(lq._a_flotante(get_val("mg1_l")), mu, cs2)
                 show_res("mg1", res)
             except Exception as e: show_res("mg1", str(e))
 
         def calc_mgk_ui(event):
             try:
-                res = lq.calc_mgk_bloqueo(float(get_val("mgk_l")), float(get_val("mgk_m")), int(get_val("mgk_k")), int(get_val("mgk_j")) if get_val("mgk_j") else None)
+                k = lq._asegurar_entero("k", lq._a_flotante(get_val("mgk_k")), minimo=1)
+                j_str = get_val("mgk_j")
+                j = lq._asegurar_entero("j", lq._a_flotante(j_str), minimo=0) if j_str else None
+                res = lq.calc_mgk_bloqueo(lq._a_flotante(get_val("mgk_l")), lq._a_flotante(get_val("mgk_m")), k, j)
                 show_res("mgk", res)
             except Exception as e: show_res("mgk", str(e))
 
         def calc_mm1ff_ui(event):
             try:
-                res = lq.calc_mm1_fuente_finita(float(get_val("mm1ff_l")), float(get_val("mm1ff_m")), int(get_val("mm1ff_n")), int(get_val("mm1ff_np")) if get_val("mm1ff_np") else None)
+                n_fuentes = lq._asegurar_entero("N", lq._a_flotante(get_val("mm1ff_n")), minimo=1)
+                n_np_str = get_val("mm1ff_np")
+                n_np = lq._asegurar_entero("n", lq._a_flotante(n_np_str), minimo=0) if n_np_str else None
+                res = lq.calc_mm1_fuente_finita(lq._a_flotante(get_val("mm1ff_l")), lq._a_flotante(get_val("mm1ff_m")), n_fuentes, n_np)
                 show_res("mm1ff", res)
             except Exception as e: show_res("mm1ff", str(e))
 
         def calc_mmkinf_ui(event):
             try:
-                res = lq.calc_mmk_infinito_n(float(get_val("mmkinf_l")), float(get_val("mmkinf_m")), int(get_val("mmkinf_k")), int(get_val("mmkinf_n")))
+                k = lq._asegurar_entero("k", lq._a_flotante(get_val("mmkinf_k")), minimo=1)
+                n = lq._asegurar_entero("N", lq._a_flotante(get_val("mmkinf_n")), minimo=1)
+                res = lq.calc_mmk_infinito_n(lq._a_flotante(get_val("mmkinf_l")), lq._a_flotante(get_val("mmkinf_m")), k, n)
                 show_res("mmkinf", res)
             except Exception as e: show_res("mmkinf", str(e))
     </script>

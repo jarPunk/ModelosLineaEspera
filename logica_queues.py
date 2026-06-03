@@ -57,9 +57,9 @@ def _asegurar_mayor(nombre: str, valor: float, limite: float = 0.0) -> None:
 def _asegurar_entero(nombre: str, valor: float, minimo: int = 1) -> int:
     entero = int(valor)
     if abs(valor - entero) > 1e-9:
-        raise ValueError(f"{nombre} debe ser entero.")
+        raise ValueError(f"Error: {nombre} debe ser un número entero.")
     if entero < minimo:
-        raise ValueError(f"{nombre} debe ser >= {minimo}.")
+        raise ValueError(f"Error: {nombre} debe ser mayor o igual a {minimo}.")
     return entero
 
 def calc_mm1(lambd: float, mu: float, n_opcional: int | None = None) -> dict[str, float]:
