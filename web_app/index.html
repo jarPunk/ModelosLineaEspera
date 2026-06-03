@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de Colas Web</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css" />
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+</head>
+<body>
+    <py-config>
+        [[fetch]]
+        files = ["./logica_queues.py"]
+    </py-config>
+
+    <div class="card">
+        <h1>Modelos de Líneas de Espera</h1>
+        <div class="tabs" id="tabContainer">
+            <button class="tab-btn active" onclick="openTab(event, 'MM1')">M/M/1</button>
+            <button class="tab-btn" onclick="openTab(event, 'MD1')">M/D/1</button>
+            <button class="tab-btn" onclick="openTab(event, 'MMK')">M/M/k</button>
+            <button class="tab-btn" onclick="openTab(event, 'MG1')">M/G/1</button>
+            <button class="tab-btn" onclick="openTab(event, 'MGK')">M/G/k</button>
+            <button class="tab-btn" onclick="openTab(event, 'MM1FF')">M/M/1 FF</button>
+            <button class="tab-btn" onclick="openTab(event, 'MMKINF')">M/M/k/∞/N</button>
+        </div>
+
+        <div id="MM1" class="tab-content active">
+            <h3>Modelo M/M/1</h3>
+            <label>λ: <input type="text" id="mm1_l"></label>
+            <label>μ: <input type="text" id="mm1_m"></label>
+            <label>n (opc): <input type="text" id="mm1_n"></label>
+            <button py-click="calc_mm1_ui">Calcular</button>
+            <pre id="res_mm1"></pre>
+        </div>
+
+        <div id="MD1" class="tab-content">
+            <h3>Modelo M/D/1</h3>
+            <label>λ: <input type="text" id="md1_l"></label>
+            <label>μ: <input type="text" id="md1_m"></label>
+            <button py-click="calc_md1_ui">Calcular</button>
+            <pre id="res_md1"></pre>
+        </div>
+
+        <div id="MMK" class="tab-content">
+            <h3>Modelo M/M/k</h3>
+            <label>λ: <input type="text" id="mmk_l"></label>
+            <label>μ: <input type="text" id="mmk_m"></label>
+            <label>k: <input type="text" id="mmk_k"></label>
+            <label>n (opc): <input type="text" id="mmk_n"></label>
+            <button py-click="calc_mmk_ui">Calcular</button>
+            <pre id="res_mmk"></pre>
+        </div>
+
+        <div id="MG1" class="tab-content">
+            <h3>Modelo M/G/1</h3>
+            <label>λ: <input type="text" id="mg1_l"></label>
+            <label>μ: <input type="text" id="mg1_m"></label>
+            <label>Cs^2: <input type="text" id="mg1_cs2"></label>
+            <button py-click="calc_mg1_ui">Calcular</button>
+            <pre id="res_mg1"></pre>
+        </div>
+
+        <div id="MGK" class="tab-content">
+            <h3>Modelo M/G/k (Bloqueo)</h3>
+            <label>λ: <input type="text" id="mgk_l"></label>
+            <label>μ: <input type="text" id="mgk_m"></label>
+            <label>k: <input type="text" id="mgk_k"></label>
+            <label>j (opc): <input type="text" id="mgk_j"></label>
+            <button py-click="calc_mgk_ui">Calcular</button>
+            <pre id="res_mgk"></pre>
+        </div>
+
+        <div id="MM1FF" class="tab-content">
+            <h3>M/M/1 Fuente Finita</h3>
+            <label>λ: <input type="text" id="mm1ff_l"></label>
+            <label>μ: <input type="text" id="mm1ff_m"></label>
+            <label>N: <input type="text" id="mm1ff_n"></label>
+            <label>n (opc): <input type="text" id="mm1ff_np"></label>
+            <button py-click="calc_mm1ff_ui">Calcular</button>
+            <pre id="res_mm1ff"></pre>
+        </div>
+
+        <div id="MMKINF" class="tab-content">
+            <h3>M/M/k/∞/N</h3>
+            <label>λ: <input type="text" id="mmkinf_l"></label>
+            <label>μ: <input type="text" id="mmkinf_m"></label>
+            <label>k: <input type="text" id="mmkinf_k"></label>
+            <label>N: <input type="text" id="mmkinf_n"></label>
+            <button py-click="calc_mmkinf_ui">Calcular</button>
+            <pre id="res_mmkinf"></pre>
+        </div>
+    </div>
+
+    <script type="py">
+        from pyscript import document
+        import logica_queues as lq
+
+        def get_val(id): return document.querySelector(f"#{id}").value
+
+        def calc_mm1_ui(event):
+            try:
+                res = lq.calc_mm1(float(get_val("mm1_l")), float(get_val("mm1_m")), int(get_val("mm1_n")) if get_val("mm1_n") else None)
+                document.querySelector("#res_mm1").innerText = "\n".join([f"{k}: {v:.4f}" for k,v in res.items()])
+            except Exception as e: document.querySelector("#res_mm1").innerText = str(e)
+
+        def calc_md1_ui(event):
+            try:
+                res = lq.calc_md1(float(get_val("md1_l")), float(get_val("md1_m")))
+                document.querySelector("#res_md1").innerText = "\n".join([f"{k}: {v:.4f}" for k,v in res.items()])
+            except Exception as e: document.querySelector("#res_md1").innerText = str(e)
+            
+        def calc_mmk_ui(event):
+            try:
+                res = lq.calc_mmk(float(get_val("mmk_l")), float(get_val("mmk_m")), int(get_val("mmk_k")), int(get_val("mmk_n")) if get_val("mmk_n") else None)
+                document.querySelector("#res_mmk").innerText = "\n".join([f"{k}: {v:.4f}" for k,v in res.items()])
+            except Exception as e: document.querySelector("#res_mmk").innerText = str(e)
+            
+        def calc_mg1_ui(event):
+            try:
+                res = lq.calc_mg1(float(get_val("mg1_l")), float(get_val("mg1_m")), float(get_val("mg1_cs2")))
+                document.querySelector("#res_mg1").innerText = "\n".join([f"{k}: {v:.4f}" for k,v in res.items()])
+            except Exception as e: document.querySelector("#res_mg1").innerText = str(e)
+
+        def calc_mgk_ui(event):
+            try:
+                res = lq.calc_mgk_bloqueo(float(get_val("mgk_l")), float(get_val("mgk_m")), int(get_val("mgk_k")), int(get_val("mgk_j")) if get_val("mgk_j") else None)
+                document.querySelector("#res_mgk").innerText = "\n".join([f"{k}: {v:.4f}" for k,v in res.items()])
+            except Exception as e: document.querySelector("#res_mgk").innerText = str(e)
+
+        def calc_mm1ff_ui(event):
+            try:
+                res = lq.calc_mm1_fuente_finita(float(get_val("mm1ff_l")), float(get_val("mm1ff_m")), int(get_val("mm1ff_n")), int(get_val("mm1ff_np")) if get_val("mm1ff_np") else None)
+                document.querySelector("#res_mm1ff").innerText = "\n".join([f"{k}: {v:.4f}" for k,v in res.items()])
+            except Exception as e: document.querySelector("#res_mm1ff").innerText = str(e)
+
+        def calc_mmkinf_ui(event):
+            try:
+                res = lq.calc_mmk_infinito_n(float(get_val("mmkinf_l")), float(get_val("mmkinf_m")), int(get_val("mmkinf_k")), int(get_val("mmkinf_n")))
+                document.querySelector("#res_mmkinf").innerText = "\n".join([f"{k}: {v:.4f}" for k,v in res.items()])
+            except Exception as e: document.querySelector("#res_mmkinf").innerText = str(e)
+    </script>
+
+    <script>
+        function openTab(evt, tabName) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            evt.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>

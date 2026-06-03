@@ -1,0 +1,25 @@
+:root {
+    --primary: #2E5B8A;
+    --bg: #EEF3F8;
+    --card: #FFFFFF;
+    --text: #243447;
+    --panel: #F7FAFD;
+}
+
+body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); color: var(--text); padding: 20px; }
+.card { background: var(--card); padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
+h1 { color: #163A59; }
+
+/* Tabs */
+.tabs { display: flex; flex-wrap: wrap; gap: 5px; }
+.tab-btn { padding: 10px 20px; cursor: pointer; background: #D9E3EF; border: none; font-weight: bold; }
+.tab-btn.active { background: var(--primary); color: white; }
+.tab-content { display: none; background: var(--panel); padding: 20px; }
+.tab-content.active { display: block; }
+
+/* Inputs */
+.input-group { margin-bottom: 15px; }
+label { display: block; margin-bottom: 5px; }
+input { padding: 8px; width: 250px; border: 1px solid #BDCAD8; }
+button { background: var(--primary); color: white; padding: 10px 20px; border: none; cursor: pointer; font-weight: bold; }
+#resultado { white-space: pre-wrap; font-family: 'Consolas', monospace; background: white; padding: 15px; border: 1px solid #BDCAD8; margin-top: 15px; }
