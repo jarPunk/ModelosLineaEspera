@@ -34,66 +34,66 @@
 
             <div id="MM1" class="tab-content active">
                 <h3>Modelo M/M/1</h3>
-                <div class="input-group"><label>Tasa llegada (λ):</label><input type="number" step="any" id="mm1_l" placeholder="Ej: 5"></div>
-                <div class="input-group"><label>Tasa servicio (μ):</label><input type="number" step="any" id="mm1_m" placeholder="Ej: 8"></div>
-                <div class="input-group"><label>n (opcional):</label><input type="number" id="mm1_n" placeholder="Ej: 2"></div>
+                <div class="input-group"><label>λ (Tasa llegada):</label><input type="number" step="any" id="mm1_l" placeholder="Ej: 5"></div>
+                <div class="input-group"><label>μ (Tasa servicio):</label><input type="number" step="any" id="mm1_m" placeholder="Ej: 8"></div>
+                <div class="input-group"><label>n (opc):</label><input type="number" id="mm1_n" placeholder="Ej: 0"></div>
                 <button py-click="calc_mm1_ui">Calcular</button>
                 <div id="res_mm1" class="result-area"></div>
             </div>
 
             <div id="MD1" class="tab-content">
                 <h3>Modelo M/D/1</h3>
-                <div class="input-group"><label>Tasa llegada (λ):</label><input type="number" step="any" id="md1_l"></div>
-                <div class="input-group"><label>Tasa servicio (μ):</label><input type="number" step="any" id="md1_m"></div>
+                <div class="input-group"><label>λ (Tasa llegada):</label><input type="number" step="any" id="md1_l" placeholder="Ej: 4"></div>
+                <div class="input-group"><label>μ (Tasa servicio):</label><input type="number" step="any" id="md1_m" placeholder="Ej: 6"></div>
                 <button py-click="calc_md1_ui">Calcular</button>
                 <div id="res_md1" class="result-area"></div>
             </div>
 
             <div id="MMK" class="tab-content">
                 <h3>Modelo M/M/k</h3>
-                <div class="input-group"><label>λ:</label><input type="number" step="any" id="mmk_l"></div>
-                <div class="input-group"><label>μ:</label><input type="number" step="any" id="mmk_m"></div>
-                <div class="input-group"><label>Servidores (k):</label><input type="number" id="mmk_k"></div>
-                <div class="input-group"><label>n (opc):</label><input type="number" id="mmk_n"></div>
+                <div class="input-group"><label>λ (Tasa llegada):</label><input type="number" step="any" id="mmk_l" placeholder="Ej: 10"></div>
+                <div class="input-group"><label>μ (Tasa servicio):</label><input type="number" step="any" id="mmk_m" placeholder="Ej: 4"></div>
+                <div class="input-group"><label>k (Servidores):</label><input type="number" id="mmk_k" placeholder="Ej: 3"></div>
+                <div class="input-group"><label>n (opc):</label><input type="number" id="mmk_n" placeholder="Ej: 1"></div>
                 <button py-click="calc_mmk_ui">Calcular</button>
                 <div id="res_mmk" class="result-area"></div>
             </div>
 
             <div id="MG1" class="tab-content">
                 <h3>Modelo M/G/1</h3>
-                <div class="input-group"><label>λ:</label><input type="number" step="any" id="mg1_l"></div>
-                <div class="input-group"><label>μ:</label><input type="number" step="any" id="mg1_m"></div>
-                <div class="input-group"><label>Variabilidad (Cs²):</label><input type="number" step="any" id="mg1_cs2"></div>
+                <div class="input-group"><label>λ (Tasa llegada):</label><input type="number" step="any" id="mg1_l" placeholder="Ej: 2"></div>
+                <div class="input-group"><label>μ (Tasa servicio):</label><input type="number" step="any" id="mg1_m" placeholder="Ej: 3"></div>
+                <div class="input-group"><label>Cs² (Variabilidad):</label><input type="number" step="any" id="mg1_cs2" placeholder="Ej: 0.5"></div>
                 <button py-click="calc_mg1_ui">Calcular</button>
                 <div id="res_mg1" class="result-area"></div>
             </div>
 
             <div id="MGK" class="tab-content">
                 <h3>M/G/k (Bloqueo)</h3>
-                <div class="input-group"><label>λ:</label><input type="number" step="any" id="mgk_l"></div>
-                <div class="input-group"><label>μ:</label><input type="number" step="any" id="mgk_m"></div>
-                <div class="input-group"><label>Canales (k):</label><input type="number" id="mgk_k"></div>
-                <div class="input-group"><label>j (opc):</label><input type="number" id="mgk_j"></div>
+                <div class="input-group"><label>λ (Tasa llegada):</label><input type="number" step="any" id="mgk_l" placeholder="Ej: 10"></div>
+                <div class="input-group"><label>μ (Tasa servicio):</label><input type="number" step="any" id="mgk_m" placeholder="Ej: 5"></div>
+                <div class="input-group"><label>k (Canales):</label><input type="number" id="mgk_k" placeholder="Ej: 3"></div>
+                <div class="input-group"><label>j (opc):</label><input type="number" id="mgk_j" placeholder="Ej: 1"></div>
                 <button py-click="calc_mgk_ui">Calcular</button>
                 <div id="res_mgk" class="result-area"></div>
             </div>
 
             <div id="MM1FF" class="tab-content">
                 <h3>M/M/1 Fuente Finita</h3>
-                <div class="input-group"><label>λ:</label><input type="number" step="any" id="mm1ff_l"></div>
-                <div class="input-group"><label>μ:</label><input type="number" step="any" id="mm1ff_m"></div>
-                <div class="input-group"><label>Población (N):</label><input type="number" id="mm1ff_n"></div>
-                <div class="input-group"><label>n (opc):</label><input type="number" id="mm1ff_np"></div>
+                <div class="input-group"><label>λ (Tasa por fuente):</label><input type="number" step="any" id="mm1ff_l" placeholder="Ej: 0.1"></div>
+                <div class="input-group"><label>μ (Tasa servicio):</label><input type="number" step="any" id="mm1ff_m" placeholder="Ej: 0.5"></div>
+                <div class="input-group"><label>N (Población):</label><input type="number" id="mm1ff_n" placeholder="Ej: 10"></div>
+                <div class="input-group"><label>n (opc):</label><input type="number" id="mm1ff_np" placeholder="Ej: 2"></div>
                 <button py-click="calc_mm1ff_ui">Calcular</button>
                 <div id="res_mm1ff" class="result-area"></div>
             </div>
 
             <div id="MMKINF" class="tab-content">
                 <h3>M/M/k/∞/N</h3>
-                <div class="input-group"><label>λ:</label><input type="number" step="any" id="mmkinf_l"></div>
-                <div class="input-group"><label>μ:</label><input type="number" step="any" id="mmkinf_m"></div>
-                <div class="input-group"><label>k:</label><input type="number" id="mmkinf_k"></div>
-                <div class="input-group"><label>N:</label><input type="number" id="mmkinf_n"></div>
+                <div class="input-group"><label>λ (Tasa por fuente):</label><input type="number" step="any" id="mmkinf_l" placeholder="Ej: 0.1"></div>
+                <div class="input-group"><label>μ (Tasa servicio):</label><input type="number" step="any" id="mmkinf_m" placeholder="Ej: 0.5"></div>
+                <div class="input-group"><label>k (Servidores):</label><input type="number" id="mmkinf_k" placeholder="Ej: 2"></div>
+                <div class="input-group"><label>N (Población):</label><input type="number" id="mmkinf_n" placeholder="Ej: 5"></div>
                 <button py-click="calc_mmkinf_ui">Calcular</button>
                 <div id="res_mmkinf" class="result-area"></div>
             </div>
@@ -111,10 +111,10 @@
             if isinstance(res, str): # Error
                 div.innerHTML = f"<div class='error-msg'>{res}</div>"
             else:
-                # Pretty printing for mobile readability
                 formatted_res = "\n".join([f"{k}: {v:.4f}" for k,v in res.items()])
                 div.innerHTML = f"<pre>{formatted_res}</pre>"
 
+        # ... (las funciones calc_..._ui se mantienen igual)
         def calc_mm1_ui(event):
             try:
                 l = float(get_val("mm1_l"))

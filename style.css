@@ -7,6 +7,20 @@
     --text-muted: #64748b;
     --border: #e2e8f0;
     --error: #ef4444;
+    --pre-bg: #f1f5f9;
+}
+
+/* Modo oscuro automático */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0f172a;
+        --card: #1e293b;
+        --text: #f1f5f9;
+        --text-muted: #94a3b8;
+        --border: #334155;
+        --pre-bg: #0f172a;
+    }
+    input, #modelSelector { background: #1e293b !important; color: white !important; }
 }
 
 body { 
@@ -17,6 +31,7 @@ body {
     padding: 20px;
     display: flex;
     justify-content: center;
+    transition: background 0.3s, color 0.3s;
 }
 
 .app-container { width: 100%; max-width: 500px; }
@@ -73,7 +88,7 @@ button:hover { background: var(--primary-dark); }
 
 .result-area { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); }
 pre { 
-    background: #f1f5f9; 
+    background: var(--pre-bg); 
     padding: 16px; 
     border-radius: 10px; 
     font-family: 'SFMono-Regular', Consolas, monospace; 
