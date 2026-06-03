@@ -5,6 +5,8 @@
     --card: #ffffff;
     --text: #2c3e50;
     --border: #d1dbe5;
+    --error-bg: #fee2e2;
+    --error-text: #991b1b;
 }
 
 body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 15px; }
@@ -12,10 +14,8 @@ body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); color: 
 .header { text-align: center; margin-bottom: 20px; }
 .card { background: var(--card); padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 
-/* Tabs */
-.tabs { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; justify-content: center; }
-.tab-btn { padding: 10px 15px; cursor: pointer; background: #e0e8f0; border: none; font-weight: 600; border-radius: 6px; }
-.tab-btn.active { background: var(--primary); color: white; }
+/* Dropdown selector */
+#modelSelector { width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 8px; border: 1px solid var(--border); font-size: 16px; background: white; cursor: pointer; }
 
 /* Content */
 .tab-content { display: none; }
@@ -25,4 +25,8 @@ label { display: block; font-weight: 600; margin-bottom: 5px; }
 input { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; box-sizing: border-box; }
 button { width: 100%; background: var(--primary); color: white; padding: 14px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 10px; }
 button:hover { background: var(--primary-dark); }
-pre { background: #f8f9fa; padding: 15px; border-radius: 6px; border: 1px solid #e9ecef; overflow-x: auto; font-family: 'Consolas', monospace; font-size: 14px; margin-top: 15px; }
+
+/* Results & Errors */
+.result-area { margin-top: 20px; }
+pre { background: #f8f9fa; padding: 15px; border-radius: 6px; border: 1px solid #e9ecef; overflow-x: auto; font-family: 'Consolas', monospace; font-size: 14px; }
+.error-msg { background: var(--error-bg); color: var(--error-text); padding: 12px; border-radius: 6px; border: 1px solid #fecaca; }
