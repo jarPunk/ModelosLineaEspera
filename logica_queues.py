@@ -146,7 +146,7 @@ def calc_mgk_bloqueo(lambd: float, mu: float, k: int, j_opcional: int | None = N
     # AJUSTE: Usamos la fórmula de la tabla: ρ = λ / (k*μ)
     rho = lambd / (k * mu)
     w = 1 / mu
-    resultados = {"P0": p0, "Pk = Pb": pb, "Pw": a, "ρ": rho, "Lq": 0.0, "L": l, "Wq": 0.0, "W": w}
+    resultados = {"P0": p0, "Pk = Pb": pb, "λe": lambda_efectiva, "Pw": a, "ρ": rho, "Lq": 0.0, "L": l, "Wq": 0.0, "W": w}
     if j_opcional is not None: resultados[f"P{j_opcional}"] = ((a**j_opcional) / math.factorial(j_opcional)) * p0
     return resultados
 
@@ -164,7 +164,7 @@ def calc_mm1_fuente_finita(lambd: float, mu: float, n_fuentes: int, n_opcional: 
     wq = lq / lambda_efectiva
     w = wq + (1 / mu)
     pw = 1 - p0
-    resultados = {"P0": p0, "Pw": pw, "Lq": lq, "L": l, "Wq": wq, "W": w}
+    resultados = {"P0": p0, "Pw": pw, "λe": lambda_efectiva, "Lq": lq, "L": l, "Wq": wq, "W": w}
     if n_opcional is not None: resultados[f"P{n_opcional}"] = (math.factorial(n_fuentes) / math.factorial(n_fuentes - n_opcional)) * (razon**n_opcional) * p0
     return resultados
 
