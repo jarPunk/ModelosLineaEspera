@@ -63,7 +63,7 @@
                 <h3>Modelo M/G/1</h3>
                 <div class="input-group"><label>λ (Tasa llegada):</label><input type="number" step="any" id="mg1_l" placeholder="Ej: 2"></div>
                 <div class="input-group"><label>μ (Tasa servicio):</label><input type="number" step="any" id="mg1_m" placeholder="Ej: 3"></div>
-                <div class="input-group"><label>Cs² (Variabilidad):</label><input type="number" step="any" id="mg1_cs2" placeholder="Ej: 0.5"></div>
+                <div class="input-group"><label>σ (Desviación estándar):</label><input type="number" step="any" id="mg1_sigma" placeholder="Ej: 0.2"></div>
                 <button py-click="calc_mg1_ui">Calcular</button>
                 <div id="res_mg1" class="result-area"></div>
             </div>
@@ -138,7 +138,13 @@
             
         def calc_mg1_ui(event):
             try:
-                res = lq.calc_mg1(float(get_val("mg1_l")), float(get_val("mg1_m")), float(get_val("mg1_cs2")))
+                # Obtenemos σ, calculamos Cs^2 = (σ * μ)^2
+                sigma = float(get_val("mg1_sigma"))
+                mu = float(get_val("mg1_m"))
+                es = 1 / mu
+                cs2 = (sigma / es) ** 2
+                
+                res = lq.calc_mg1(float(get_val("mg1_l")), mu, cs2)
                 show_res("mg1", res)
             except Exception as e: show_res("mg1", str(e))
 
