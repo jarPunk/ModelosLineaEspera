@@ -86,14 +86,23 @@ button {
 }
 button:hover { background: var(--primary-dark); }
 
-.result-area { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); }
-pre { 
-    background: var(--pre-bg); 
-    padding: 16px; 
-    border-radius: 10px; 
-    font-family: 'SFMono-Regular', Consolas, monospace; 
-    font-size: 0.9rem;
-    overflow-x: auto;
+.res-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+.res-table td {
+    padding: 10px;
+    border-bottom: 1px solid var(--border);
+}
+.res-table td:first-child {
+    font-weight: bold;
+    color: var(--primary);
+    width: 40%;
+}
+.res-table td:last-child {
+    text-align: right;
+    font-family: 'Consolas', monospace;
 }
 .error-msg { 
     background: #fee2e2; 
@@ -101,4 +110,5 @@ pre {
     padding: 16px; 
     border-radius: 10px; 
     font-size: 0.9rem;
+    margin-top: 15px;
 }

@@ -111,8 +111,21 @@
             if isinstance(res, str): # Error
                 div.innerHTML = f"<div class='error-msg'>{res}</div>"
             else:
-                formatted_res = "\n".join([f"{k}: {v:.4f}" for k,v in res.items()])
-                div.innerHTML = f"<pre>{formatted_res}</pre>"
+                # Diccionario para mapear claves a símbolos de tu tabla
+                simbolos = {
+                    "P0": "P₀", "Pn": "Pₙ", "Pw": "P_w", "ρ": "ρ",
+                    "Lq": "L_q", "L": "L", "Wq": "W_q", "W": "W",
+                    "λe": "λₑ", "Pk = Pb": "P_k (P_b)", "a = λ/μ": "a (λ/μ)",
+                    "E[S]": "E[S]", "E[S^2]": "E[S²]"
+                }
+                
+                html_res = "<table class='res-table'>"
+                for k, v in res.items():
+                    # Usar símbolo si existe, si no, la clave original
+                    display_k = simbolos.get(k, k)
+                    html_res += f"<tr><td><strong>{display_k}</strong></td><td>{v:.4f}</td></tr>"
+                html_res += "</table>"
+                div.innerHTML = html_res
 
         # ... (las funciones calc_..._ui se mantienen igual)
         def calc_mm1_ui(event):
