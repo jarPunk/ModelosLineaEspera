@@ -119,10 +119,22 @@
                     "E[S]": "E[S]", "E[S^2]": "E[S²]"
                 }
                 
+                # Función para formatear el símbolo con subíndices bonitos
+                def formatear_simbolo(s):
+                    # Reemplazos manuales para visualización
+                    mapa = {
+                        "P_0": "P₀", "P0": "P₀",
+                        "L_q": "L_q", "Lq": "L_q",
+                        "W_q": "W_q", "Wq": "W_q",
+                        "P_k (P_b)": "P_k (P_b)",
+                        "λ_e": "λₑ", "λe": "λₑ"
+                    }
+                    return mapa.get(s, s)
+
                 html_res = "<table class='res-table'>"
                 for k, v in res.items():
-                    # Usar símbolo si existe, si no, la clave original
-                    display_k = simbolos.get(k, k)
+                    # Usar mapeo de símbolos
+                    display_k = formatear_simbolo(k)
                     html_res += f"<tr><td><strong>{display_k}</strong></td><td>{v:.4f}</td></tr>"
                 html_res += "</table>"
                 div.innerHTML = html_res
